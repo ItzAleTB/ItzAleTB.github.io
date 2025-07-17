@@ -1,0 +1,281 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Comic Sans MS', cursive;
+  background: linear-gradient(to top, #ffd5ec, #fff1f8);
+  color: #444;
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* BOTÓN */
+#playButton {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px 40px;
+  font-size: 24px;
+  background: linear-gradient(45deg, #ff4da6, #ff85b8);
+  color: white;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(255, 77, 166, 0.6);
+  transition: all 0.3s ease;
+  z-index: 1000;
+  font-family: 'Comic Sans MS', cursive;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+}
+
+#playButton:hover {
+  transform: translate(-50%, -50%) scale(1.1);
+  box-shadow: 0 6px 25px rgba(255, 77, 166, 0.8);
+}
+
+.container {
+  text-align: center;
+  padding: 40px 20px;
+  z-index: 2;
+  position: relative;
+  display: none;
+  max-width: 800px;
+  margin: 0 auto;
+  min-height: 100vh;
+}
+
+.titulo {
+  font-size: 3.5em;
+  color: #ff4da6;
+  animation: fadeIn 2s ease-in-out, pulse 2s infinite alternate;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  margin-bottom: 40px;
+}
+
+/* CARTA */
+.carta {
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 20px;
+  padding: 40px;
+  max-width: 700px;
+  margin: 0 auto 60px;
+  text-align: left;
+  box-shadow: 0 10px 30px rgba(255, 105, 180, 0.4);
+  animation: slideIn 2s ease-in-out;
+  line-height: 1.8;
+  font-size: 19px;
+  position: relative;
+  backdrop-filter: blur(5px);
+  overflow-y: auto;
+  max-height: 70vh;
+  border: 2px dashed #ff4da6;
+  margin: 30px auto;
+}
+
+/* CONTENEDORES DE ANIMACIONES */
+#animaciones, #confetti-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+}
+
+/* ELEMENTOS FLOTANTES */
+.floating-element {
+  position: absolute;
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation-timing-function: linear;
+  opacity: 1;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.confetti {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  opacity: 0;
+  animation: confettiFall 5s linear forwards;
+}
+
+/* ANIMACIONES */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes floatElement {
+  0% {
+    transform: translateY(100vh) translateX(0) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100px) translateX(calc(-50% + 100px)) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+@keyframes sway {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(20px); }
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+@keyframes confettiFall {
+  0% { transform: translateY(-100px) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+}
+
+/* SCROLL PERSONALIZADO */
+.carta::-webkit-scrollbar {
+  width: 10px;
+}
+
+.carta::-webkit-scrollbar-track {
+  background: rgba(255, 182, 193, 0.2);
+  border-radius: 10px;
+}
+
+.carta::-webkit-scrollbar-thumb {
+  background: #ff85b8;
+  border-radius: 10px;
+}
+
+.carta::-webkit-scrollbar-thumb:hover {
+  background: #ff4da6;
+}
+
+/* ANIMACIONES VISIBLES */
+@keyframes floatUp {
+  0% {
+    transform: translateY(100vh) rotate(0deg) scale(0.8);
+    opacity: 0.8;
+  }
+  20% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100px) rotate(360deg) scale(1);
+    opacity: 0.9;
+  }
+}
+
+.floating-element {
+  position: absolute;
+  z-index: 5;
+  pointer-events: none;
+  opacity: 1 !important; /* Forzar visibilidad */
+}
+
+.floating-element img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 0 8px rgba(255,255,255,0.7));
+}
+
+/* CONTENEDOR DE ANIMACIONES - ASEGURAR QUE ESTÉ DETRÁS DEL CONTENIDO PERO SOBRE EL FONDO */
+#animaciones {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+  background-color: transparent !important;
+}
+
+/* NUEVAS ANIMACIONES */
+@keyframes floatUp {
+  0% {
+    transform: translateY(0) scale(0.5);
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+    transform: translateY(-20px) scale(1);
+  }
+  100% {
+    transform: translateY(-100px) scale(0.8);
+    opacity: 0;
+  }
+}
+
+@keyframes floatDown {
+  0% {
+    transform: translateY(0) scale(0.5);
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+    transform: translateY(20px) scale(1);
+  }
+  100% {
+    transform: translateY(100px) scale(0.8);
+    opacity: 0;
+  }
+}
+
+@keyframes floatLeft {
+  0% {
+    transform: translateX(0) scale(0.5);
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+    transform: translateX(-20px) scale(1);
+  }
+  100% {
+    transform: translateX(-100px) scale(0.8);
+    opacity: 0;
+  }
+}
+
+@keyframes floatRight {
+  0% {
+    transform: translateX(0) scale(0.5);
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+    transform: translateX(20px) scale(1);
+  }
+  100% {
+    transform: translateX(100px) scale(0.8);
+    opacity: 0;
+  }
+}
+
+/* Efectos adicionales para más variedad */
+.floating-element {
+  will-change: transform, opacity; /* Mejora rendimiento de animaciones */
+  transition: all 0.3s ease;
+}
+
+.floating-element:hover {
+  transform: scale(1.1) !important;
+  filter: brightness(1.2);
+}
